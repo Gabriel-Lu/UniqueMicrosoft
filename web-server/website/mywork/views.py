@@ -8,10 +8,11 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def index(request):
 	if request.method == 'POST':
-		tem = request.POST.get('tem')
-		oth = request.POST.get('oth')
-		boo = request.POST.get('boo')
-		q = infos(tem=tem,oth=oth,boo=boo)
+		airtem = request.POST.get('airtem')
+		airhum = request.POST.get('airhum')
+		oilhum = request.POST.get('oilhum')
+		light = request.POST.get('light')
+		q = infos(airtem=airtem,airhum=airhum,oilhum=oilhum,light=light)
 		q.save()
 		return HttpResponse('create success')
 	if request.method == 'GET':

@@ -51,8 +51,11 @@ def autoreply(request):
             the_list_results = infos.objects.all()
             if len(the_list_results) != 0:
                 print(str(the_list_results[0].tem))
-                the_content = "最近的温度"+str(the_list_results[len(the_list_results)-1].tem)
-            content = "您好,欢迎来到黑客马拉松!希望我们可以一起进步!\n\n\n"+the_content
+                the_content1 = "空气温度"+str(the_list_results[len(the_list_results)-1].airtem)
+                the_content2 = "空气湿度"+str(the_list_results[len(the_list_results)-1].airtem)
+                the_content3 = "土壤湿度"+str(the_list_results[len(the_list_results)-1].airtem)
+                the_content4 = "光照强度"+str(the_list_results[len(the_list_results)-1].airtem)
+            content = "您好,欢迎来到黑客马拉松!希望我们可以一起进步!\n\n\n"+the_content1+'\n'+the_content2+'\n'+the_content3+"\n"+the_content4+'\n'
             #content = "你好"
             replyMsg = TextMsg(toUser, fromUser, content)
             print ("成功了!!!!!!!!!!!!!!!!!!!")
