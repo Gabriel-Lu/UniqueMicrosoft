@@ -10,6 +10,9 @@ namespace UniqueExcelConsole
     {
         private void RibbonUI_Load(object sender, RibbonUIEventArgs e)
         {
+            AIActionPane aiAction = new AIActionPane();
+            Globals.ThisWorkbook.ActionsPane.Controls.Add(aiAction);
+            Globals.ThisWorkbook.ActionsPane.Name = "Acc";
 
         }
 
@@ -19,9 +22,11 @@ namespace UniqueExcelConsole
             SocketConnect.SocketBind();
         }
 
-        private void button1_Click(object sender, RibbonControlEventArgs e)
+       
+
+        private void AI_Click(object sender, RibbonControlEventArgs e)
         {
-            //CellSetFunctions.InsertRowData("A", "B", "C", "D");
+            Globals.ThisWorkbook.Application.DisplayDocumentActionTaskPane = !Globals.ThisWorkbook.Application.DisplayDocumentActionTaskPane;
         }
     }
 }

@@ -108,6 +108,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AIActionPane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AIActionPane.Designer.cs">
+      <DependentUpon>AIActionPane.cs</DependentUpon>
+    </Compile>
     <Compile Include="CellSetFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RibbonUI.cs">
@@ -141,6 +147,9 @@
     <Compile Include="ThisWorkbook.Designer.cs">
       <DependentUpon>ThisWorkbook.Designer.xml</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AIActionPane.resx">
+      <DependentUpon>AIActionPane.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
