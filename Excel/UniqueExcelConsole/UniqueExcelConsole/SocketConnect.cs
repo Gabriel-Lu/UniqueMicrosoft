@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -62,6 +63,7 @@ namespace UniqueExcelConsole
         /// <param name="o"></param>
         public static void Recive(object o)
         {
+
             try
             {
                 var send = o as Socket;
@@ -75,8 +77,19 @@ namespace UniqueExcelConsole
                     {
                         break;
                     }
-                    //这里绑定了IP
-                    var str = send.RemoteEndPoint + Encoding.UTF8.GetString(buffer, 0, effective);
+                    //这里绑定了IP send.RemoteEndPoint + 
+                    string str = Encoding.UTF8.GetString(buffer, 0, effective);
+                    ControlDataClass dataClass = JsonConvert.DeserializeObject<ControlDataClass>(str);
+                    try
+                    {
+                        CellSetFunctions.InsertSheet2RowData(dataClass.Humi, dataClass.Temp, dataClass.Light);
+                    }
+                    catch
+                    {
+
+                    }
+                    
+
                     Debug.WriteLine(str);
                     //var buffers = Encoding.UTF8.GetBytes("Recived:" + str);
                     //将得到的字符串再返回给下位机
@@ -85,28 +98,25 @@ namespace UniqueExcelConsole
                     //ExcelAct(str);
                     //Range["F2"].Value2 = "sss";
 
-                    Globals.Ribbons.RibbonUI.DebugLabel.Label = str;
 
-                    /*
-                    Microsoft.Office.Interop.Excel.Range range;
-                    range = Globals.Sheet1.Application.Selection;
-                    range.Interior.Color = Color.Red;
-                    */
                 }
             }
             catch
             {
 
             }
+
+
+
         }
     }
 
 
 
-    public class Rootobject
+    public class ControlDataClass
     {
-        public string AirTemp { get; set; }
-        public string AirHumi { get; set; }
-        public string Light { get; set; }
+        public int Humi { get; set; }
+        public int Temp { get; set; }
+        public int Light { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace UniqueExcelConsole
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
-            CellSetFunctions.InsertRowData("A", "B", "C", "D");
+            //CellSetFunctions.InsertRowData("A", "B", "C", "D");
         }
     }
 }
