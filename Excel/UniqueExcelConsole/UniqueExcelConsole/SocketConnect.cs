@@ -15,6 +15,7 @@ namespace UniqueExcelConsole
 
     public static class SocketConnect
     {
+
         public static void SocketBind()
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -79,16 +80,25 @@ namespace UniqueExcelConsole
                     }
                     //这里绑定了IP send.RemoteEndPoint + 
                     string str = Encoding.UTF8.GetString(buffer, 0, effective);
-                    ControlDataClass dataClass = JsonConvert.DeserializeObject<ControlDataClass>(str);
+                    string[] ip = send.RemoteEndPoint.ToString().Split(':');
                     try
                     {
-                        CellSetFunctions.InsertSheet2RowData(dataClass.Humi, dataClass.Temp, dataClass.Light);
+                        if ( ip[0]== "192.168.43.161")
+                        {
+                            CellSetFunctions.InsertSheet3RowData(str);
+                        }
+                        else
+                        {
+                            ControlDataClass dataClass = JsonConvert.DeserializeObject<ControlDataClass>(str);
+                            CellSetFunctions.InsertSheet2RowData(dataClass.Humi, dataClass.Temp, dataClass.Light);
+                        }
+
                     }
                     catch
                     {
                         //令人窒息的Bug！！！！
                     }
-                    
+
 
                     Debug.WriteLine(str);
                     //var buffers = Encoding.UTF8.GetBytes("Recived:" + str);
@@ -109,10 +119,35 @@ namespace UniqueExcelConsole
 
 
         }
+
+
+        /// <summary>
+        /// 这是发送消息的方法！
+        /// </summary>
+        static void SendSocket()
+        {
+            Socket socketClient = new Socket(SocketType.Stream, ProtocolType.Tcp);
+            IPAddress ip = IPAddress.Parse("192.168.0.111");
+            IPEndPoint point = new IPEndPoint(ip, 2333);
+            //进行连接
+            socketClient.Connect(point);
+
+            //不停的接收服务器端发送的消息
+            Thread thread = new Thread(Recive);
+            thread.IsBackground = true;
+            thread.Start(socketClient);
+
+            //不停的给服务器发送数据
+            int i = 0;
+            while (true)
+            {
+                i++;
+                var buffter = Encoding.UTF8.GetBytes($"Test Send Message:{i}");
+                var temp = socketClient.Send(buffter);
+                Thread.Sleep(1000);
+            }
+        }
     }
-
-
-
     public class ControlDataClass
     {
         public int Humi { get; set; }

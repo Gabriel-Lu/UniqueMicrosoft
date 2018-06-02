@@ -58,6 +58,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -115,6 +116,7 @@
       <DependentUpon>AIActionPane.cs</DependentUpon>
     </Compile>
     <Compile Include="CellSetFunctions.cs" />
+    <Compile Include="Draw.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RibbonUI.cs">
       <SubType>Component</SubType>
@@ -162,6 +164,9 @@
     <EmbeddedResource Include="RibbonUI.resx">
       <DependentUpon>RibbonUI.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sheet1.resx">
+      <DependentUpon>Sheet1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sheet2.resx">
       <DependentUpon>Sheet2.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,6 +205,9 @@
     <None Include="Sheet3.Designer.xml">
       <DependentUpon>Sheet3.cs</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
