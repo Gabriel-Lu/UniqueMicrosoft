@@ -32,10 +32,11 @@ Adafruit_SSD1306 display(OLED_RESET);
 //用于接收Json
 StaticJsonBuffer<200> jsonBuffer;
 String socketJson;
+JsonObject& root=jsonBuffer.createObject();
 void setup() 
 {
    WiFiConfig();
-   JsonObject&root=jsonBuffer.createObject();
+
    Serial.begin(9600);
    delay(10);
    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -44,6 +45,7 @@ void setup()
 
 void loop() 
 {
+
    while (!client.connected())//几个非连接的异常处理
     {
         if (!client.connect(host, tcpPort))
@@ -62,6 +64,7 @@ void loop()
         delay(20);
         display.clearDisplay();
     }
+
     while (client.available())//available()同ARDUINO，不解释了
     {
 
@@ -126,7 +129,9 @@ void loop()
   display.clearDisplay();
   
   root.printTo(socketJson);
-  client.write(socketJson);
+  client.println(socketJson);
+  Serial.println(socketJson);
+  socketJson="";
   delay(200);
   
  /*

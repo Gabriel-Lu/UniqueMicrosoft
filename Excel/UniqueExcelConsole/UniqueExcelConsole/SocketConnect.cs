@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace UniqueExcelConsole
 {
+
     public static class SocketConnect
     {
         public static void SocketBind()
@@ -98,5 +99,14 @@ namespace UniqueExcelConsole
 
             }
         }
+    }
+
+
+
+    public class Rootobject
+    {
+        public string AirTemp { get; set; }
+        public string AirHumi { get; set; }
+        public string Light { get; set; }
     }
 }
