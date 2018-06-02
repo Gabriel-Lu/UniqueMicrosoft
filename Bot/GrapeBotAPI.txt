@@ -1,0 +1,5 @@
+POST /knowledgebases/84376fd5-512b-498c-bbdb-cce159efdc43/generateAnswer
+Host: https://grapebot.azurewebsites.net/qnamaker
+Authorization: EndpointKey 70df815a-7934-4d9e-9134-623bdd26d618
+Content-Type: application/json
+{"question":"<Your question>"}
