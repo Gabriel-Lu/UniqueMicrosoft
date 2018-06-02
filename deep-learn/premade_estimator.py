@@ -14,11 +14,6 @@ CSV_COLUMN_NAMES = ['airtem', 'airhum',
 # 我们提供的分类结果包括a,b,c,d四种，代表从好到坏
 SPECIES = ['a', 'b', 'c','d']
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--batch_size', default=100, type=int, help='batch size')
-parser.add_argument('--train_steps', default=1000, type=int,
-                    help='number of training steps')
-
 def train_input_fn(features, labels, batch_size):
     # 转换输入为训练需要的dataset
     dataset = tf.data.Dataset.from_tensor_slices((dict(features), labels))
@@ -85,13 +80,4 @@ def dl_predict(classifier,a,b,c,d):
         probability = pred_dict['probabilities'][class_id]
         print(template.format(SPECIES[class_id],
                               100 * probability, SPECIES[class_id]))
-        print(probability)
-    return class_id,100*probability
-
-if __name__ == '__main__':
-    classifier = dl_train()
-
-    import urllib.request
-    a = urllib.request.urlopen("http://139.198.18.176/admin").read().decode('utf-8')
-    print(a)
-    dl_predict(classifier,2,2,2,2)
+    return class_id,probability

@@ -7,6 +7,7 @@ from lxml import etree
 from django.utils.encoding import smart_str
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from urllib import request 
  
 WEIXIN_TOKEN = 'hacker'
 @csrf_exempt
@@ -47,16 +48,24 @@ def autoreply(request):
 
         toUser = FromUserName
         fromUser = ToUserName
+
         if msg_type == 'text':
             the_list_results = infos.objects.all()
             if len(the_list_results) != 0:
-                print(str(the_list_results[0].tem))
-                the_content1 = "空气温度"+str(the_list_results[len(the_list_results)-1].airtem)
-                the_content2 = "空气湿度"+str(the_list_results[len(the_list_results)-1].airtem)
-                the_content3 = "土壤湿度"+str(the_list_results[len(the_list_results)-1].airtem)
-                the_content4 = "光照强度"+str(the_list_results[len(the_list_results)-1].airtem)
-            content = "您好,欢迎来到黑客马拉松!希望我们可以一起进步!\n\n\n"+the_content1+'\n'+the_content2+'\n'+the_content3+"\n"+the_content4+'\n'
-            #content = "你好"
+                d1 = str(the_list_results[len(the_list_results)-1].airtem)
+                d2 = str(the_list_results[len(the_list_results)-1].airhum)
+                d3 = str(the_list_results[len(the_list_results)-1].oilhum)
+                d4 = str(the_list_results[len(the_list_results)-1].light)
+                just = ["特别适宜","适宜生长","情况一般","情况糟糕"]
+                zhonglei, kexindu = eval()
+                print(zhonglei)
+                print(kexindu)
+                the_content1 = "空气温度"+d1
+                the_content2 = "空气湿度"+str(the_list_results[len(the_list_results)-1].airhum)
+                the_content3 = "土壤湿度"+str(the_list_results[len(the_list_results)-1].oilhum)
+                the_content4 = "光照强度"+str(the_list_results[len(the_list_results)-1].light)
+            content = "您好,欢迎来到黑客马拉松!希望我们可以一起进步!\n"+the_content1+the_content2+the_content3+the_content4+"\n神经网络评估当前环境: "+just[int(zhonglei)]+"评估可信度 "+kexindu
+            #content = the_content1
             replyMsg = TextMsg(toUser, fromUser, content)
             print ("成功了!!!!!!!!!!!!!!!!!!!")
             print (replyMsg)
@@ -90,6 +99,21 @@ def autoreply(request):
 
     except Exception as Argment:
         return Argment
+
+def eval():
+    the_list_results = infos.objects.all()
+    if len(the_list_results) != 0:
+        d1 = str(the_list_results[len(the_list_results)-1].airtem)
+        d2 = str(the_list_results[len(the_list_results)-1].airhum)
+        d3 = str(the_list_results[len(the_list_results)-1].oilhum)
+        d4 = str(the_list_results[len(the_list_results)-1].light)
+        the_url = "http://139.198.18.176:81/{0}/{1}/{2}/{3}".format(d1,d2,d3,d4)
+        x = request.urlopen(the_url).read().decode('utf-8')
+        print(x)
+        x = x.split(' ',1)
+        print(x[0])
+        print(x[1])
+        return x[0],x[1]
 
 class Msg(object):
     def __init__(self, xmlData):
