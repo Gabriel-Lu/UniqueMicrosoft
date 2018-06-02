@@ -26,12 +26,14 @@ namespace UniqueExcelConsole
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InternalStartup()
-        {
-            this.Startup += new System.EventHandler(Sheet1_Startup);
-            this.Shutdown += new System.EventHandler(Sheet1_Shutdown);
+        {          
+            this.Startup += new System.EventHandler(this.Sheet1_Startup);
+            this.Shutdown += new System.EventHandler(this.Sheet1_Shutdown);
+
         }
-        
+
         #endregion
 
+        
     }
 }

@@ -39,21 +39,35 @@
             this.group3 = this.Factory.CreateRibbonGroup();
             this.label1 = this.Factory.CreateRibbonLabel();
             this.DebugLabel = this.Factory.CreateRibbonLabel();
-            this.Connect = this.Factory.CreateRibbonButton();
             this.group2 = this.Factory.CreateRibbonGroup();
+            this.group4 = this.Factory.CreateRibbonGroup();
+            this.group5 = this.Factory.CreateRibbonGroup();
+            this.Connect = this.Factory.CreateRibbonButton();
             this.AI = this.Factory.CreateRibbonButton();
+            this.Draw = this.Factory.CreateRibbonButton();
+            this.UploadQing = this.Factory.CreateRibbonButton();
+            this.CarMove = this.Factory.CreateRibbonButton();
+            this.CarStop = this.Factory.CreateRibbonButton();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
+            this.group6 = this.Factory.CreateRibbonGroup();
             this.种植小助手.SuspendLayout();
             this.group1.SuspendLayout();
             this.group3.SuspendLayout();
             this.group2.SuspendLayout();
+            this.group4.SuspendLayout();
+            this.group5.SuspendLayout();
+            this.group6.SuspendLayout();
             this.SuspendLayout();
             // 
             // 种植小助手
             // 
             this.种植小助手.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.种植小助手.Groups.Add(this.group1);
+            this.种植小助手.Groups.Add(this.group6);
             this.种植小助手.Groups.Add(this.group3);
             this.种植小助手.Groups.Add(this.group2);
+            this.种植小助手.Groups.Add(this.group4);
+            this.种植小助手.Groups.Add(this.group5);
             this.种植小助手.Label = "Unique MS";
             this.种植小助手.Name = "种植小助手";
             // 
@@ -80,20 +94,32 @@
             this.DebugLabel.Label = "暂无调试信息输出";
             this.DebugLabel.Name = "DebugLabel";
             // 
-            // Connect
-            // 
-            this.Connect.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.Connect.Label = "连接设备";
-            this.Connect.Name = "Connect";
-            this.Connect.OfficeImageId = "OrgChartLayoutSpacingChange";
-            this.Connect.ShowImage = true;
-            this.Connect.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Connect_Click);
-            // 
             // group2
             // 
             this.group2.Items.Add(this.AI);
             this.group2.Label = "召唤AI种植小助手";
             this.group2.Name = "group2";
+            // 
+            // group4
+            // 
+            this.group4.Items.Add(this.Draw);
+            this.group4.Label = "建立种植用地";
+            this.group4.Name = "group4";
+            // 
+            // group5
+            // 
+            this.group5.Items.Add(this.UploadQing);
+            this.group5.Label = "上传数据进行分析";
+            this.group5.Name = "group5";
+            // 
+            // Connect
+            // 
+            this.Connect.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.Connect.Label = "连接固定设备";
+            this.Connect.Name = "Connect";
+            this.Connect.OfficeImageId = "OrgChartLayoutSpacingChange";
+            this.Connect.ShowImage = true;
+            this.Connect.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Connect_Click);
             // 
             // AI
             // 
@@ -103,6 +129,54 @@
             this.AI.OfficeImageId = "NewCustomButton";
             this.AI.ShowImage = true;
             this.AI.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.AI_Click);
+            // 
+            // Draw
+            // 
+            this.Draw.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.Draw.Label = "Adjust Route Of Inspection";
+            this.Draw.Name = "Draw";
+            this.Draw.OfficeImageId = "PageWidthGuideShowHide";
+            this.Draw.ShowImage = true;
+            this.Draw.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.Draw_Click);
+            // 
+            // UploadQing
+            // 
+            this.UploadQing.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.UploadQing.Label = "上传至青云";
+            this.UploadQing.Name = "UploadQing";
+            this.UploadQing.OfficeImageId = "OverallFeedback";
+            this.UploadQing.ShowImage = true;
+            this.UploadQing.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.UploadQing_Click);
+            // 
+            // CarMove
+            // 
+            this.CarMove.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.CarMove.Label = "检测车开始检测";
+            this.CarMove.Name = "CarMove";
+            this.CarMove.OfficeImageId = "ProcessEngineeringApplyTagFormat";
+            this.CarMove.ShowImage = true;
+            this.CarMove.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.CarMove_Click);
+            // 
+            // CarStop
+            // 
+            this.CarStop.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.CarStop.Label = "小车停止检测";
+            this.CarStop.Name = "CarStop";
+            this.CarStop.OfficeImageId = "PositionAbsoluteMarks";
+            this.CarStop.ShowImage = true;
+            this.CarStop.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.CarStop_Click);
+            // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
+            // 
+            // group6
+            // 
+            this.group6.Items.Add(this.CarMove);
+            this.group6.Items.Add(this.separator2);
+            this.group6.Items.Add(this.CarStop);
+            this.group6.Label = "检测小车控制面板";
+            this.group6.Name = "group6";
             // 
             // RibbonUI
             // 
@@ -118,6 +192,12 @@
             this.group3.PerformLayout();
             this.group2.ResumeLayout(false);
             this.group2.PerformLayout();
+            this.group4.ResumeLayout(false);
+            this.group4.PerformLayout();
+            this.group5.ResumeLayout(false);
+            this.group5.PerformLayout();
+            this.group6.ResumeLayout(false);
+            this.group6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -132,6 +212,14 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel DebugLabel;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton AI;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton Draw;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group5;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton UploadQing;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton CarMove;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton CarStop;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group6;
     }
 
     partial class ThisRibbonCollection
