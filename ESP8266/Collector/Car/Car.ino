@@ -17,6 +17,18 @@ void loop() {
 
   digitalWrite(Car_VCC,HIGH);
   digitalWrite(Car_GND,LOW);
-    
+
+    /*
+     * 
+  Serial.print("AO=");    
+  Serial.print(analogRead(PIN_AO));  
+  Serial.print(", DO=");    
+  Serial.println(digitalRead(PIN_DO)); 
+     * 
+     */
+     */
+
+     //别忘了计算每秒 行进多少距离
+     //这样才能适应盒子
   delay(500);    
 }   
