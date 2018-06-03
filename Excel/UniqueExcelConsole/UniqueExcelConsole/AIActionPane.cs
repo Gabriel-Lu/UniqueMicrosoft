@@ -28,10 +28,10 @@ namespace UniqueExcelConsole
 
         void SendAIMsg()
         {
-            var client = new RestClient("https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/8f9e4e52-b814-407a-9a6a-b7a84e2be69d/generateAnswer");
+            var client = new RestClient("https://grapebot.azurewebsites.net/qnamaker/knowledgebases/84376fd5-512b-498c-bbdb-cce159efdc43/generateAnswer");
             var request = new RestRequest(Method.POST);
             request.AddHeader("Cache-Control", "no-cache");
-            request.AddHeader("Ocp-Apim-Subscription-Key", "e920fbfd67074beb97e52abf4aef4dc3");
+            request.AddHeader("Authorization", "EndpointKey 70df815a-7934-4d9e-9134-623bdd26d618");
             request.AddHeader("Content-Type", "application/json");
             string s = ("{\"question\":\"" + this.Question.Text + "\"}");
 
