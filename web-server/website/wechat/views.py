@@ -45,11 +45,12 @@ def autoreply(request):
         CreateTime = xmlData.find('CreateTime').text
         MsgType = xmlData.find('MsgType').text
         MsgId = xmlData.find('MsgId').text
+        MsgContent = xmlData.find('Content').text
 
         toUser = FromUserName
         fromUser = ToUserName
 
-        if msg_type == 'text':
+        if msg_type == 'text' and MsgContent.find("绑定 ")==0:
             the_list_results = infos.objects.all()
             if len(the_list_results) != 0:
                 d1 = str(the_list_results[len(the_list_results)-1].airtem)
@@ -64,7 +65,7 @@ def autoreply(request):
                 the_content2 = "空气湿度"+str(the_list_results[len(the_list_results)-1].airhum)
                 the_content3 = "土壤湿度"+str(the_list_results[len(the_list_results)-1].oilhum)
                 the_content4 = "光照强度"+str(the_list_results[len(the_list_results)-1].light)
-            content = "您好,欢迎来到黑客马拉松!希望我们可以一起进步!\n"+the_content1+the_content2+the_content3+the_content4+"\n神经网络评估当前环境: "+just[int(zhonglei)]+"评估可信度 "+kexindu
+            content = "您好,您查询的区域{0}情况如下\n\n".format(MsgContent[3:])+the_content1+the_content2+the_content3+the_content4+"\n\n神经网络评估当前环境: "+just[int(zhonglei)]+"\n评估可信度 "+kexindu
             #content = the_content1
             replyMsg = TextMsg(toUser, fromUser, content)
             print ("成功了!!!!!!!!!!!!!!!!!!!")
