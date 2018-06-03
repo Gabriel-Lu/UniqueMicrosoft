@@ -1,7 +1,6 @@
 #include <ESP8266WiFi.h>
 
-#define PIN_AO A0  
-#define PIN_DO 4  
+#define PIN_AO A0    
 const int trig=12;//D6
 const int echo=13;//D7
 
