@@ -85,6 +85,7 @@ namespace UniqueExcelConsole
                     {
                         if ( ip[0]== "192.168.43.161")
                         {
+                            //走到这一步这说明小车移动了
                             CellSetFunctions.InsertSheet3RowData(str);
                         }
                         else

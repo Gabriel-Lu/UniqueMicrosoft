@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.Office.Tools.Ribbon;
 
 namespace UniqueExcelConsole
@@ -41,7 +43,16 @@ namespace UniqueExcelConsole
             //开一个新线程
             //for循环将 数据一条一条的上传
 
+            for (int i = 2; i < 50; i++)
+            {
+                string[] data = CellSetFunctions.IndexForUploading(i);
+                PostManToWeChat.PostDataToQing(data[0], data[1], data[2], data[3]);
+                
+            }
+            Debug.WriteLine("所以数据上传完成");
+
         }
+        
 
         private void CarMove_Click(object sender, RibbonControlEventArgs e)
         {
