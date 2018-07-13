@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Media.SpeechSynthesis;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+
+// https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
+
+namespace LuBotUWPClient
+{
+    /// <summary>
+    /// 可用于自身或导航至 Frame 内部的空白页。
+    /// </summary>
+    public sealed partial class MainPage : Page
+    {
+        private SpeechSynthesizer synthesizer;
+
+        public MainPage()
+        {
+            this.InitializeComponent();
+        }
+
+        private async void Speak_Click(object sender, RoutedEventArgs e)
+        {
+            synthesizer = new SpeechSynthesizer();
+            //speechSynthesizer.Voice= SpeechSynthesizer.AllVoices
+            var voice = SpeechSynthesizer.AllVoices[4];//我这里是HuiHui你需要把下面的代码注释掉，看下你的在第几个
+            //检测中文的HuiHui到底在第几个
+            //foreach (VoiceInformation voice in voices.OrderBy(p=>p.Language))
+            //{
+            //    ComboBoxItem item = new ComboBoxItem();
+            //    item.Name = voice.DisplayName;
+            //    item.Tag = voice;
+            //    item.Content = voice.DisplayName + " (Language: " + voice.Language + ")"+voice;
+            //    ListItem.Items.Add(item);
+            //}
+
+            synthesizer.Voice = voice;
+            SpeechSynthesisStream synthesisStream = await synthesizer.SynthesizeTextToStreamAsync("你好世界");
+
+            // Set the source and start playing the synthesized audio stream.
+            media.AutoPlay = true;
+            media.SetSource(synthesisStream, synthesisStream.ContentType);
+            media.Play();
+
+
+
+
+        }
+
+        private void ListItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void media_MediaEnded(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
+}
