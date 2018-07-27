@@ -1,0 +1,24 @@
+var topUserLanguage = Windows.System.UserProfile.GlobalizationPreferences.Languages[0];
+            var language = new Windows.Globalization.Language(topUserLanguage);
+
+            // Create an instance of SpeechRecognizer.
+            var speechRecognizer = new Windows.Media.SpeechRecognition.SpeechRecognizer(language);
+            // Compile the dictation grammar by default.
+
+            var request = WebRequest.Create(con);
+            //WebRequest要用alt+enter.
+            request.Headers["Authorization"] = "EndpointKey 11b886e0-1f74-4064-907a-0be7f331400d";
+            //这个在qnaMaker生成bot后获得
+
+
+            
+
+
+            await speechRecognizer.CompileConstraintsAsync();
+            // 开始识别
+            Windows.Media.SpeechRecognition.SpeechRecognitionResult speechRecognitionResult = await speechRecognizer.RecognizeWithUIAsync();
+
+
+            // 反馈识别
+            string datas = "{\"question\":\"" + speechRecognitionResult.Text + "\"}";
+
